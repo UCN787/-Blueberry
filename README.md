@@ -15,12 +15,12 @@ Blueberry is a responsive web messenger prototype backed by the configured Supab
 - Username lookup, room search, current-chat message search, favorites, and light/dark theme.
 - Reply, edit/delete own messages, one emoji reaction per message.
 - Image avatar upload (2 MiB limit) and arbitrary message files (20 MiB limit) in private Supabase Storage, with RLS access checks. Images preview inline; audio and video attachments have in-chat playback.
-- Record and send voice notes and short video notes from the composer. Video previews keep their original proportions. Browser microphone/camera permission is required; recordings are sent as private attachments.
+- Attach files from the composer; image, audio, and video attachments can be previewed in chat. Video-message recording is intentionally disabled.
 - Mobile layout, registration error messages, preserved login session.
 
 ## Run it
 
-The database schema and policies are already installed in the connected Supabase project. To run locally, open a terminal in `outputs` and execute `node server.mjs`, then visit `http://localhost:4173/online.html`. Keep the server running while using the app. This address works only on this computer.
+The database schema and policies are already installed in the connected Supabase project. To run locally, double-click `start-site.cmd`. It starts the server and opens the app at `http://localhost:4173/index.html`. Do not open `index.html` directly as `file://`: browser security blocks the local Supabase module and the buttons cannot initialize.
 
 For a second person on another device, deploy the files in `outputs` to an HTTPS static host and share that URL. Set the hosted URL in Supabase **Authentication → URL Configuration**. The Supabase backend still needs to be reachable over the internet.
 
@@ -30,7 +30,8 @@ The `index.html` file is the GitHub Pages entry point. Upload the contents of th
 
 ## Not implemented yet
 
-Voice and video notes are active. One-to-one and group calls, screen sharing, reliable scheduled delivery, polls/quizzes, stickers/GIF catalogs, stories, saved messages, folders/archive, member role management screens, moderation tools, comments/statistics/livestreams, secret chats, and end-to-end encryption are not implemented yet. Calls need authenticated WebRTC signaling plus TURN (and an SFU for reliable group calls). Secret chats require a reviewed end-to-end encryption design and key verification. Translation/transcription, GIF search, and reliable offline scheduling need external service integrations. The supplied Blueberry mark is used from `blueberry-logo-reference.png`; CSS reveals the light or dark half according to the selected theme without editing the image.
+Voice and video-note recording is not included. One-to-one and group calls, screen sharing, reliable scheduled delivery, polls/quizzes, stickers/GIF catalogs, stories, saved messages, folders/archive, member role management screens, moderation tools, comments/statistics/livestreams, secret chats, and end-to-end encryption are not implemented yet. Calls need authenticated WebRTC signaling plus TURN (and an SFU for reliable group calls). Secret chats require a reviewed end-to-end encryption design and key verification. Translation/transcription, GIF search, and reliable offline scheduling need external service integrations. The supplied Blueberry mark is used from `blueberry-logo-reference.png`; CSS reveals the light or dark half according to the selected theme without editing the image.
 
 The public publishable key is embedded in the page and is meant for client use. RLS policies protect database rows; the secret key is not included. Review auth confirmation, email delivery, storage quotas, backups, abuse controls, rate limits and privacy policy before public launch.
+
 
